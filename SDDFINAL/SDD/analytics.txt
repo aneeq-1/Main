@@ -1,0 +1,9 @@
+4.7/10,Car, Train, Bus,2700/4000
+4/5,car,train,bus,2000/2500
+5/9,car, walk, cycle,600/65867
+9/10,car, train,50/60
+9/99,car,9/90
+60/80,train,9/60
+wef,asff,sdv
+q,q,q
+4,4,4
