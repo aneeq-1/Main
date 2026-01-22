@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Minecraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="ProductPages.css">
+    <style>
+        body {
+            background-image: url('Images/BackgroundMC.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Raleway';
+            position: relative;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/BackgroundMC.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px); /* Adjust the blur amount as needed */
+            z-index: -1;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="Homepage.php">Home</a></li>
+            <li><a href="PlayStation.php">PlayStation</a></li>
+            <li><a href="Steam.php">Steam</a></li>
+            <li><a href="Xbox.php">Xbox</a></li>
+            <li><a href="Nintendo.php">Nintendo</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="game-cover">
+            <img src="Images/minecraft.jpeg" alt="Minecraft Cover">
+            <p class="product-name">Minecraft</p>
+            <p class="product-price" data-price="19.99">£19.99</p>
+            <button onclick="addToBasket('Minecraft', 19.99, 'Images/minecraft.jpeg')">Add to Basket</button>
+        </div>
+        <div class="game-details">
+            <h1>Minecraft</h1>
+            <p>Explore the infinite world of Minecraft and the endless possibilities of creativity. Build anything you can imagine, whether you are in survival mode, gathering resources and battling mobs, or in creative mode, letting your imagination run wild with an unlimited supply of resources.</p>
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="xbox">Xbox</option>
+                <option value="playstation">PlayStation</option>
+                <option value="nintendo">Nintendo</option>
+            </select>
+            <p>Characteristics: Open world - Explore different landscapes and numerous biomes. Multiplayer - Play with friends or split screen. Buy now and start the adventure!</p>
+            <p>Genre: Sandbox</p>
+            <p>Author: Mojang Studios</p>
+            <p>Price: £19.99</p>
+            <button class="add-to-basket" onclick="addToBasket('Minecraft', 19.99, 'Images/minecraft.jpeg')">Add to Basket</button>
+        </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+        <button class="arrow arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
+        <div class="gallery">
+            <img src="Images/MC1.webp" alt="Minecraft Screenshot 1">
+            <img src="Images/MC2.jpeg" alt="Minecraft Screenshot 2">
+            <img src="Images/MC3.jpeg" alt="Minecraft Screenshot 3">
+            <img src="Images/MC4.jpeg" alt="Minecraft Screenshot 4">
+            <img src="Images/MC5.jpeg" alt="Minecraft Screenshot 5">
+            <img src="Images/MC6.jpeg" alt="Minecraft Screenshot 6">
+        </div>
+        <button class="arrow arrow-right" onclick="scrollGallery(1)">&#10095;</button>
+    </div>
+
+    <footer id="footer">
+        <p>&copy; 2025 Hex Games. All Rights Reserved.</p>
+        <p>
+            <a href="TermsOfService.html">Terms of Service</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="AboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <script>
+        let basket = [];
+
+        function addToBasket(name, price, image) {
+    // Get the existing basket from Local Storage or initialize an empty array
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    // Check if the item already exists in the basket
+    const existingItem = basket.find(item => item.name === name);
+    if (existingItem) {
+        // If the item exists, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // If the item doesn't exist, add it to the basket
+        basket.push({ name, price, image, quantity: 1 });
+    }
+
+    // Save the updated basket back to Local Storage
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    alert(`${name} has been added to your basket!`);
+}
+
+        let scrollAmount = 0;
+
+        function scrollGallery(direction) {
+            const gallery = document.querySelector('.gallery');
+            const galleryWidth = gallery.scrollWidth;
+            const containerWidth = document.querySelector('.gallery-container').offsetWidth;
+            const maxScroll = galleryWidth - containerWidth;
+
+            scrollAmount += direction * containerWidth;
+
+            if (scrollAmount < 0) {
+                scrollAmount = 0;
+            } else if (scrollAmount > maxScroll) {
+                scrollAmount = maxScroll;
+            }
+
+            gallery.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    </script>
+</body>
+</html>

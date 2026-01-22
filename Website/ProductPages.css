@@ -1,0 +1,159 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-cover {
+    flex: 1;
+    padding: 20px;
+}
+
+.game-cover img {
+    width: 100%;
+    height: auto;
+    max-width: 600px; /* Adjust as needed */
+}
+
+.game-details {
+    flex: 2;
+    padding: 20px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the content */
+}
+
+.game-details h1 {
+    font-size: 48px;
+}
+
+.game-details p {
+    font-size: 24px;
+}
+
+.add-to-basket {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-basket:hover {
+    background-color: darkblue;
+}
+
+.gallery-container {
+    position: relative;
+    width: 98%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the gallery */
+}
+
+.gallery {
+    display: flex;
+    transition: transform 0.5s ease;
+    scrollbar-width: none; /* Firefox */
+}
+
+.gallery::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.gallery img {
+    margin: 0 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    width: 400px; /* Set width to 400px */
+    height: 225px;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(6, 14, 86, 0.8); /* Match the navbar color */
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 20px; /* Increased padding */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.arrow-left {
+    left: 30px;
+}
+
+.arrow-right {
+    right: 30px;
+}
+
+/* Navigation bar styles */
+nav {
+    width: 100%;
+    background-color: rgba(6, 14, 86, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer styles */
+footer {
+    background-color: rgba(6, 14, 86, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 98%;
+    font-size: 12px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

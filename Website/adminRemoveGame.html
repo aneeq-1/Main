@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            HEX Games
+        </title>
+        <!-- Preconnect to Google Fonts for faster loading -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Import the Raleway font from Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+        <!-- Link to an external stylesheet -->
+        <link rel="stylesheet" type="text/css" href="homepagestyles.css">
+        <style>
+            /* Style for the body, including background, alignment, and font */
+            body {
+                background-color: rgba(233, 255, 255, 0.664);
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                color: white;
+                font-size: 18px;
+                font-family: 'Raleway';
+                position: relative;
+                background-image: url('blueabstract.mp4');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                height: 90vh;
+                flex-direction: column;
+            }
+
+            /* Style for the background video */
+            video {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: -1;
+                transform: translate(-50%, -50%);
+                background-size: cover;
+            }
+
+            /* Style for the main heading */
+            h1 {
+                font-size: 48px;
+                margin-top: -5px;
+                margin-bottom: 3px;
+                font-weight: 800;
+            }
+
+            /* Style for secondary headings */
+            h2 {
+                font-size: 48px;
+                margin-top: 10px;
+                font-weight: 800;
+            }
+
+            /* Style for smaller headings */
+            h3 {
+                font-size: 26px;
+                margin-top: -20px;
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            /* Style for the table */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                color: rgba(9, 10, 63, 0.9);
+                font-family: 'Raleway';
+                font-size: 25px;
+                text-align: left;
+            }
+
+            /* Style for table headers */
+            th {
+                background-color: rgba(9, 10, 63, 0.9);
+                color: white;
+            }
+
+            /* Style for table rows */
+            tr {
+                background-color: white;
+            }
+
+            /* Style for buttons */
+            .button {
+                background-color: rgba(9, 10, 63, 0.9);
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            /* Style for the side menu */
+            .side-menu {
+                height: 65%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: rgba(9, 10, 63, 0.9);
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 200px;
+            }
+
+            /* Style for links in the side menu */
+            .side-menu a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* Hover effect for links in the side menu */
+            .side-menu a:hover {
+                color: #f1f1f1;
+            }
+
+            /* Style for the close button in the side menu */
+            .side-menu .close-btn {
+                position: absolute;
+                top: 20px;
+                right: 25px;
+                font-size: 36px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Background video for the page -->
+        <video autoplay muted loop>
+            <source src="Images/blueabstract.mp4" type="video/mp4">
+        </video>
+        <!-- Button to open the side menu -->
+        <button class="top-right-button" onclick="openMenu()">
+            <img src="Images/Profile.png" alt="Person Icon">
+        </button>
+        <!-- Side menu for navigation -->
+        <div id="sideMenu" class="side-menu">
+            <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+            <a href="adminRemoveGame.html">View Games</a>
+            <a href="adminViewUsers.html">View Users</a>
+            <a href="adminAddGame.html">Add Games</a>
+            <a href="Homepage.html">Logout</a>
+        </div>
+        <script>
+            /* Function to open the side menu */
+            function openMenu() {
+                document.getElementById("sideMenu").style.width = "250px";
+            }
+    
+            /* Function to close the side menu */
+            function closeMenu() {
+                document.getElementById("sideMenu").style.width = "0";
+            }
+
+            /* Function to remove a row from the table */
+            function removeRow(button) {
+                const row = button.closest('tr');
+                row.parentNode.removeChild(row);
+            }
+
+            /* Function to load games from local storage and display them in the table */
+            function loadGames() {
+                const games = JSON.parse(localStorage.getItem("games")) || [];
+                const table = document.querySelector("table");
+
+                games.forEach(game => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${game.name}</td>
+                        <td>${game.price}</td>
+                        <td><button class="button button1" onclick="removeRow(this)">Remove</button></td>
+                    `;
+                    table.appendChild(row);
+                });
+            }
+
+            /* Event listener to load games when the page is loaded */
+            document.addEventListener("DOMContentLoaded", loadGames);
+        </script>
+        <!-- Logo for the page -->
+        <img src="Images/logo.png" height="250" width="250">
+        <!-- Main heading -->
+        <h1>
+            HEX Games
+        </h1>
+        <!-- Secondary heading -->
+        <h2>
+            View Games
+        </h2>
+        <!-- Description heading -->
+        <h3>
+            Here are all the games in the database
+        </h3>
+        <!-- Scrollable container for the table -->
+        <div style="overflow-y: auto; max-height: 70vh; border: 1px solid #ccc;">
+        <!-- Table displaying games -->
+        <table>
+            <tr>
+                <th>
+                    Game
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Remove
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <a href="FinalFantasyVII.html">Final Fantasy VII</a>
+                </td>
+                <td>
+                    &#163;49.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="Zelda.html">The Legend Of Zelda</a>
+                </td>
+                <td>
+                    &#163;49.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="EldenRing.html">Elden Ring</a>
+                </td>
+                <td>
+                    &#163;49.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="BlackOps6.html">Black Ops 6</a>
+                </td>
+                <td>
+                    &#163;69.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="DoomEternal.html">Doom Eternal</a>
+                </td>
+                <td>
+                    &#163;39.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="EASportsFC25.html">EA Sports FC 25</a>
+                </td>
+                <td>
+                    &#163;59.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="GranTurismo7.html">Gran Turismo 7</a>
+                </td>
+                <td>
+                    &#163;59.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="ForzaHorizon5.html">Forza Horizon 5</a>
+                </td>
+                <td>
+                    &#163;59.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="GhostOfTsushima.html">Ghost Of Tsushima</a>
+                </td>
+                <td>
+                    &#163;49.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="GOWRagnarok.html">God Of War: Ragnarok</a>
+                </td>
+                <td>
+                    &#163;69.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="HogwartsLegacy.html">Hogwarts Legacy</a>
+                </td>
+                <td>
+                    &#163;69.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="ItTakesTwo.html">It Takes Two</a>
+                </td>
+                <td>
+                    &#163;59.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="Kirby.html">Kirby</a>
+                </td>
+                <td>
+                    &#163;59.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="LostArk.html">Lost Ark</a>
+                </td>
+                <td>
+                    &#163;13.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="PokemonLegends.html">Pokemon Legends</a>
+                </td>
+                <td>
+                    &#163;69.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="Rust.html">Rust</a>
+                </td>
+                <td>
+                    &#163;49.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="SeaOfThieves.html">Sea of Thieves</a>
+                </td>
+                <td>
+                    &#163;39.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="Spiderman.html">Spiderman</a>
+                </td>
+                <td>
+                    &#163;69.99
+                </td>
+                <td>
+                    <button class="button button1" onclick="removeRow(this)">Remove</button>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </body>
+</html>

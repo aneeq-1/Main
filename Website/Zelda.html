@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>The Legend of Zelda: Echoes of Wisdom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="ProductPages.css">
+    <style>
+        body {
+            background-image: url('Images/BackgroundZelda.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Raleway';
+            position: relative;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/BackgroundZelda.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="background-blur"></div>
+    <nav>
+        <ul class="navbar">
+            <li><a href="Homepage.php">Home</a></li>
+            <li><a href="PlayStation.php">PlayStation</a></li>
+            <li><a href="Steam.php">Steam</a></li>
+            <li><a href="Xbox.php">Xbox</a></li>
+            <li><a href="Nintendo.php">Nintendo</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="container">
+        <div class="game-cover">
+            <img src="Images/TheLegendOFZelda.jpeg" alt="The Legend of Zelda: Echoes of Wisdom Cover">
+            <p class="product-name">The Legend Of Zelda</p>
+            <p class="product-price" data-price="69.99">£69.99</p>
+            <button onclick="addToBasket('The Legend Of Zelda', 69.99, 'Images/TheLegendOFZelda.jpeg')">Add to Basket</button>
+        </div>
+        <div class="game-details">
+            <h1>The Legend of Zelda: Echoes of Wisdom</h1>
+            <p>The Legend of Zelda: Echoes of Wisdom is the newest addition to the series placing princess Zelda in the
+                spotlight. With Link missing, Zelda must use the Tri Rod to produce echoes of items and enemies in order
+                to solve puzzles and fight to preserve Hyrule. Explore the landscape and discover secrets in this
+                amazing adventure.</p>
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="nintendo">Nintendo</option>
+            </select>
+            <p>Characteristics: Single Player, Large Map - Explore Hyrule, Still world. Buy now!</p>
+            <p>Genre: Action/Adventure</p>
+            <p>Author: Nintendo</p>
+            <p>Published by: Nintendo</p>
+            <p>Price: £49.99</p>
+            <button onclick="addToBasket('The Legend Of Zelda', 49.99, 'Images/TheLegendOFZelda.jpeg')">Add to Basket</button>
+        </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+        <button class="arrow arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
+        <div class="gallery">
+            <img src="Images/Zelda1.jpeg" alt="Zelda Screenshot 1">
+            <img src="Images/Zelda2.png" alt="Zelda Screenshot 2">
+            <img src="Images/Zelda3.png" alt="Zelda Screenshot 3">
+            <img src="Images/Zelda4.png" alt="Zelda Screenshot 4">
+            <img src="Images/Zelda5.png" alt="Zelda Screenshot 5">
+            <img src="Images/Zelda6.png" alt="Zelda Screenshot 6">
+        </div>
+        <button class="arrow arrow-right" onclick="scrollGallery(1)">&#10095;</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Hex Games. All Rights Reserved.</p>
+        <p>
+            <a href="TermsOfService.html">Terms of Service</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="AboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <script>
+        let basket = [];
+
+        function addToBasket(name, price, image) {
+    // Get the existing basket from Local Storage or initialize an empty array
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    // Check if the item already exists in the basket
+    const existingItem = basket.find(item => item.name === name);
+    if (existingItem) {
+        // If the item exists, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // If the item doesn't exist, add it to the basket
+        basket.push({ name, price, image, quantity: 1 });
+    }
+
+    // Save the updated basket back to Local Storage
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    alert(`${name} has been added to your basket!`);
+}
+
+        let scrollAmount = 0;
+
+        function scrollGallery(direction) {
+            const gallery = document.querySelector('.gallery');
+            const galleryContainer = document.querySelector('.gallery-container');
+            const containerWidth = galleryContainer.offsetWidth;
+            // Scroll left (-1) or right (1)
+
+            const maxScroll = gallery.scrollWidth - containerWidth;
+            scrollAmount += direction * containerWidth;
+
+            if (scrollAmount < 0) {
+                scrollAmount = 0;
+            } else if (scrollAmount > maxScroll) {
+                scrollAmount = maxScroll;
+            }
+
+            gallery.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    </script>
+</body>
+
+</html>

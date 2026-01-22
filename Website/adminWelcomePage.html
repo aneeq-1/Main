@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            HEX Games
+        </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="homepagestyles.css">
+        <style>
+            body {
+                background-color: rgba(233, 255, 255, 0.664);
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                color: white;
+                font-size: 18px;
+                font-family: 'Raleway';
+                position: relative;
+                background-image: url('blueabstract.mp4');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                height: 90vh;
+                flex-direction: column;
+            }
+
+            video {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: -1;
+                transform: translate(-50%, -50%);
+                background-size: cover;
+            }
+
+            h1 {
+                font-size: 48px;
+                margin-top: -5px;
+                margin-bottom: 3px;
+                font-weight: 800
+            }
+
+            h2 {
+                font-size: 48px;
+                margin-top: 10px;
+                font-weight: 800
+            }
+
+            h3 {
+                font-size: 26px;
+                margin-top: -20px;
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            .button {
+                background-color: #4CAF50;
+                /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            .button1 {
+                background-color: white;
+                color: rgb(0, 30, 201);
+                border: 2px solid rgb(0, 30, 201);
+            }
+
+            .button1:hover {
+                background-color: rgb(0, 30, 201);
+                color: white;
+                border: 2px solid white;
+            }
+
+            .button2 {
+                background-color: white;
+                color: rgb(0, 30, 201);
+            }
+            .side-menu {
+            height: 65%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: rgba(9, 10, 63, 0.9);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 200px;
+        }
+        .side-menu a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .side-menu a:hover {
+            color: #f1f1f1;
+        }
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+        }
+        </style>
+    </head>
+    <body>
+        <video autoplay muted loop>
+            <source src="Images/blueabstract.mp4" type="video/mp4">
+        </video>
+        <button class="top-right-button" onclick="openMenu()">
+            <img src="Images/Profile.png" alt="Person Icon">
+        </button>
+        <div id="sideMenu" class="side-menu">
+            <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+            <a href="Homepage.html">Logout</a>
+        </div>
+        <img src="Images/logo.png" height="250" width="250">
+        <h1>
+            Welcome to HEX Games
+        </h1>
+        <h2>
+            Admin Page
+        </h2>
+        <h3>
+            Please select an option below
+        </h3>
+        <a href="adminAddGame.html">
+            <button class="button button1">
+                Add Game
+            </button>
+        </a>
+        <a href="adminRemoveGame.html">
+            <button class="button button1">
+                Remove Game
+            </button>
+        </a>
+        <a href="adminViewUsers.html">
+            <button class="button button1">
+                View Users
+            </button>
+        </a>
+        <script>
+            function openMenu() {
+                document.getElementById("sideMenu").style.width = "250px";
+            }
+    
+            function closeMenu() {
+                document.getElementById("sideMenu").style.width = "0";
+            }
+
+        </script>
+    </body>
+</html>

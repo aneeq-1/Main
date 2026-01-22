@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rust</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="ProductPages.css">
+    <style>
+        body {
+            background-image: url('Images/BackgroundRust.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Raleway';
+            position: relative;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/BackgroundRust.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px); /* Adjust the blur amount as needed */
+            z-index: -1;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="Homepage.php">Home</a></li>
+            <li><a href="PlayStation.php">PlayStation</a></li>
+            <li><a href="Steam.php">Steam</a></li>
+            <li><a href="Xbox.php">Xbox</a></li>
+            <li><a href="Nintendo.php">Nintendo</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="game-cover">
+            <img src="Images/Rust.webp" alt="Rust" Cover" alt="Rust Cover">
+            <p class="product-name">Rust</p>
+            <p class="product-price" data-price="49.99">£49.99</p>
+            <button onclick="addToBasket('Rust', 49.99, 'Images/Rust.webp')">Add to Basket</button>
+        </div>
+        <div class="game-details">
+            <h1>Rust</h1>
+            <p>Rust is a hardcore survival game where the main goal is to fight and stay alive. Build bases, gather materials and craft weapons to survive against players and harsh wildlife.</p>
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="xbox">Xbox</option>
+               
+                <option value="Steam">Steam</option>
+            </select>
+            <p>Characteristics: Online multiplayer- 2-100 players - Open world- Explore a world of forests, desserts and ruins - PVP- Go head to head with clans in intense gunfights - Building- Design bases to protect loot. Buy now, Trust no one!</p>
+            <p>Genre: Adventure/Action/Survival</p>
+            <p>Author: Facepunch Studios</p>
+            <p>Price: £49.99</p>
+            <button class="add-to-basket" onclick="addToBasket('Rust', 49.99, 'Images/Rust.webp')">Add to Basket</button>
+        </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+        <button class="arrow arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
+        <div class="gallery">
+            <img src="Images/R1.png" alt="Rust Screenshot 1">
+            <img src="Images/R2.webp" alt="Rust Screenshot 2">
+            <img src="Images/R3.jpg" alt="Rust Screenshot 3">
+            <img src="Images/R4.jpg" alt="Rust Screenshot 4">
+            <img src="Images/R5.png" alt="Rust Screenshot 5">
+            <img src="Images/R6.jpg" alt="Rust Screenshot 6">
+        </div>
+        <button class="arrow arrow-right" onclick="scrollGallery(1)">&#10095;</button>
+    </div>
+
+    <footer id="footer">
+        <p>&copy; 2025 Hex Games. All Rights Reserved.</p>
+        <p>
+            <a href="TermsOfService.html">Terms of Service</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="AboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <script>
+        let basket = [];
+
+        function addToBasket(name, price, image) {
+    // Get the existing basket from Local Storage or initialize an empty array
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    // Check if the item already exists in the basket
+    const existingItem = basket.find(item => item.name === name);
+    if (existingItem) {
+        // If the item exists, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // If the item doesn't exist, add it to the basket
+        basket.push({ name, price, image, quantity: 1 });
+    }
+
+    // Save the updated basket back to Local Storage
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    alert(`${name} has been added to your basket!`);
+}
+
+        let scrollAmount = 0;
+
+        function scrollGallery(direction) {
+            const gallery = document.querySelector('.gallery');
+            const galleryWidth = gallery.scrollWidth;
+            const containerWidth = document.querySelector('.gallery-container').offsetWidth;
+            const maxScroll = galleryWidth - containerWidth;
+
+            scrollAmount += direction * containerWidth;
+
+            if (scrollAmount < 0) {
+                scrollAmount = 0;
+            } else if (scrollAmount > maxScroll) {
+                scrollAmount = maxScroll;
+            }
+
+            gallery.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    </script>
+</body>
+</html>

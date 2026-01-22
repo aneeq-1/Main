@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+ <html>
+     <head>
+         <title>
+             HEX Games
+         </title>
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+         <link rel="stylesheet" type="text/css" href="homepagestyles.css">
+         <style>
+             body {
+                 background-color: rgba(233, 255, 255, 0.664);
+                 text-align: center;
+                 align-items: center;
+                 justify-content: center;
+                 display: flex;
+                 color: white;
+                 font-size: 18px;
+                 font-family: 'Raleway';
+                 position: relative;
+                 background-image: url('blueabstract.mp4');
+                 background-size: cover;
+                 background-repeat: no-repeat;
+                 background-attachment: fixed;
+                 height: 90vh;
+                 flex-direction: column;
+             }
+ 
+             video {
+                 position: fixed;
+                 top: 50%;
+                 left: 50%;
+                 min-width: 100%;
+                 min-height: 100%;
+                 width: auto;
+                 height: auto;
+                 z-index: -1;
+                 transform: translate(-50%, -50%);
+                 background-size: cover;
+             }
+ 
+             h1 {
+                 font-size: 48px;
+                 margin-top: -5px;
+                 margin-bottom: 3px;
+                 font-weight: 800
+             }
+ 
+             h2 {
+                 font-size: 48px;
+                 margin-top: 10px;
+                 font-weight: 800
+             }
+ 
+             h3 {
+                 font-size: 26px;
+                 margin-top: -20px;
+                 font-weight: 200;
+                 font-style: italic;
+             }
+ 
+             table {
+                 border-collapse: collapse;
+                 width: 100%;
+                 color: rgba(9, 10, 63, 0.9);
+                 font-family: 'Raleway';
+                 font-size: 25px;
+                 text-align: left;
+             }
+ 
+             th {
+                 background-color: rgba(9, 10, 63, 0.9);
+                 color: white;
+             }
+ 
+             tr:nth-child(even) {
+                 background-color: white;
+             }
+ 
+             .button {
+                 background-color: rgba(9, 10, 63, 0.9);
+                 /* Green */
+                 border: none;
+                 color: white;
+                 padding: 15px 32px;
+                 text-align: center;
+                 text-decoration: none;
+                 display: inline-block;
+                 font-size: 16px;
+                 margin: 4px 2px;
+                 cursor: pointer;
+             }
+             .side-menu {
+             height: 65%;
+             width: 0;
+             position: fixed;
+             z-index: 1;
+             top: 0;
+             right: 0;
+             background-color: rgba(9, 10, 63, 0.9);
+             overflow-x: hidden;
+             transition: 0.5s;
+             padding-top: 60px;
+             border-top-left-radius: 0px;
+             border-bottom-left-radius: 200px;
+         }
+         .side-menu a {
+             padding: 8px 8px 8px 32px;
+             text-decoration: none;
+             font-size: 25px;
+             color: white;
+             display: block;
+             transition: 0.3s;
+         }
+         .side-menu a:hover {
+             color: #f1f1f1;
+         }
+         .side-menu .close-btn {
+             position: absolute;
+             top: 20px;
+             right: 25px;
+             font-size: 36px;
+         }
+             </style>
+     </head>
+     <body>
+         <video autoplay muted loop>
+             <source src="Images/blueabstract.mp4" type="video/mp4">
+         </video>
+         <button class="top-right-button" onclick="openMenu()">
+             <img src="Images/Profile.png" alt="Person Icon">
+         </button>
+         <div id="sideMenu" class="side-menu">
+             <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+             <a href="adminRemoveGame.html">View Games</a>
+             <a href="adminViewUsers.html">View Users</a>
+             <a href="adminAddGame.html">Add Games</a>
+             <a href="Homepage.html">Logout</a>
+         </div>
+         <script>
+             function openMenu() {
+                 document.getElementById("sideMenu").style.width = "250px";
+             }
+     
+             function closeMenu() {
+                 document.getElementById("sideMenu").style.width = "0";
+             }
+
+             function addGame() {
+                 const gameName = document.getElementById("gameName").value;
+                 const gamePrice = document.getElementById("gamePrice").value;
+
+                 if (gameName && gamePrice) {
+                     // Save the game details to localStorage
+                     const games = JSON.parse(localStorage.getItem("games")) || [];
+                     games.push({ name: gameName, price: gamePrice });
+// Save the updated array back to localStorage
+                     localStorage.setItem("games", JSON.stringify(games));
+
+// Notify the user and reset the form
+                     alert("Game added successfully!");
+                     document.getElementById("addGameForm").reset();
+                 } else {
+// Alert the user if fields are missing
+                     alert("Please fill in all fields.");
+                 }
+             }
+         </script>
+         <a href= "Homepage.html"><img src= "Images/logo.png" height="250" width="250"></a>
+         <h1>
+             HEX Games
+         </h1>
+         <h2>
+             View Games
+         </h2>
+         <h3>
+             Here are all the games in the database
+         </h3>
+        
+         <h2>
+             Add Game
+         </h2>
+         <h3>
+             Enter the game details below
+         </h3>
+         <form id="addGameForm">
+<!-- Input for the game name -->
+             <label for="gameName">Game Name:</label>
+             <input type="text" id="gameName" name="gameName" required>
+             <br><br>
+<!-- Input for the game price -->
+             <label for="gamePrice">Price:</label>
+             <input type="text" id="gamePrice" name="gamePrice" required>
+             <br><br>
+             <button type="button" class="button button1" onclick="addGame()">Add Game</button>
+         </form>
+     </body>
+ </html>

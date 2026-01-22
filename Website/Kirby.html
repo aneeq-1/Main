@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Kirby's Return to Dream Land Deluxe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="ProductPages.css">
+    <style>
+        body {
+            background-image: url('Images/backgroundKirby.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Raleway';
+            position: relative;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/backgroundKirby.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="background-blur"></div>
+    <nav>
+        <ul class="navbar">
+            <li><a href="Homepage.php">Home</a></li>
+            <li><a href="PlayStation.php">PlayStation</a></li>
+            <li><a href="Steam.php">Steam</a></li>
+            <li><a href="Xbox.php">Xbox</a></li>
+            <li><a href="Nintendo.php">Nintendo</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="game-cover">
+            <img src="Images/Kirby.jpeg" alt="Kirby's Return to Dream Land Deluxe Cover">
+            <p class="product-name">Kirby</p>
+            <p class="product-price" data-price="59.99">£59.99</p>
+            <button onclick="addToBasket('Kirby', 59.99, 'Images/Kirby.jpeg')">Add to Basket</button>
+        </div>
+        <div class="game-details">
+            <h1>Kirby's Return to Dream Land Deluxe</h1>
+            <p>Join Kirby on his journey in Dream Land, In Kirby's Return to Dream Land Deluxe. Kirby and his friends
+                must assist an alien by the name Magolor to recover pieces of his crashed ship after he crashes on
+                planet Popstar all while solving challenging puzzles.</p>
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="nintendo">Nintendo</option>
+            </select>
+            <p>Characteristics: Explore a bright and colorful world of secrets, Single player, Co-op. Buy now and join
+                Kirby!</p>
+            <p>Genre: Adventure</p>
+            <p>Author: HAL Laboratory</p>
+            <p>Published by: Nintendo</p>
+            <p>Price: £39.99</p>
+            <button class="add-to-basket" onclick="addToBasket('Kirby\'s Return to Dream Land Deluxe', 39.99, 'Images/Kirby.jpeg')">Add to Basket</button>
+        </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+        <button class="arrow arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
+        <div class="gallery">
+            <img src="Images/Kirby1.jpg" alt="Kirby Screenshot 1">
+            <img src="Images/Kirby2.jpg" alt="Kirby Screenshot 2">
+            <img src="Images/Kirby3.jpg" alt="Kirby Screenshot 3">
+            <img src="Images/Kirby4.jpg" alt="Kirby Screenshot 4">
+            <img src="Images/Kirby5.jpg" alt="Kirby Screenshot 5">
+            <img src="Images/Kirby6.jpg" alt="Kirby Screenshot 6">
+        </div>
+        <button class="arrow arrow-right" onclick="scrollGallery(1)">&#10095;</button>
+    </div>
+
+</body>
+<script>
+    let basket = [];
+
+    function addToBasket(name, price, image) {
+    // Get the existing basket from Local Storage or initialize an empty array
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    // Check if the item already exists in the basket
+    const existingItem = basket.find(item => item.name === name);
+    if (existingItem) {
+        // If the item exists, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // If the item doesn't exist, add it to the basket
+        basket.push({ name, price, image, quantity: 1 });
+    }
+
+    // Save the updated basket back to Local Storage
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    alert(`${name} has been added to your basket!`);
+}
+
+    let scrollAmount = 0;
+
+    function scrollGallery(direction) {
+        const gallery = document.querySelector('.gallery');
+        const galleryContainer = document.querySelector('.gallery-container');
+        const containerWidth = galleryContainer.offsetWidth;
+        // Scroll left (-1) or right (1)
+        const scrollStep = 400;
+
+
+        const maxScroll = gallery.scrollWidth - containerWidth;
+
+        scrollAmount += direction * scrollStep;
+
+        if (scrollAmount < 0) {
+            scrollAmount = 0;
+        } else if (scrollAmount > maxScroll) {
+            scrollAmount = maxScroll;
+        }
+
+        gallery.style.transform = `translateX(-${scrollAmount}px)`;
+    }
+</script>
+
+</html>

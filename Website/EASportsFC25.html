@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EA Sports Fc 25</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,800;1,300;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="ProductPages.css">
+    <style>
+        body {
+            background-image: url('Images/BackgroundEAFC25.avif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Raleway';
+            position: relative;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Images/BackgroundEAFC25.avif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(5px); /* Adjust the blur amount as needed */
+            z-index: -1;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="Homepage.php">Home</a></li>
+            <li><a href="PlayStation.php">PlayStation</a></li>
+            <li><a href="Steam.php">Steam</a></li>
+            <li><a href="Xbox.php">Xbox</a></li>
+            <li><a href="Nintendo.php">Nintendo</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="game-cover">
+            <img src="Images/EASportsFC25.jpeg" alt="EASportsFC25 Cover">
+            <p class="product-name">EA Sports Fc 25</p>
+            <p class="product-price" data-price="59.99">£59.99</p>
+            <button onclick="addToBasket('EA Sports Fc 25', 59.99, 'Images/EASportsFC25.jpeg')">Add to Basket</button>
+        
+        </div>
+        <div class="game-details">
+            <h1>EA Sports FC 25 </h1>
+            <p>EA Sports Fc25 is the latest installment in the extensive line of football simulation games from Electronic Arts. The game offers a realistic football experience and enhanced graphics like never before. Players can select their favorite characters and go head-to-head against real players on the pitch. The game also offers many exciting modes such as 5v5 rush mode and career mode.  </p>
+            <label for="platform">Platform:</label>
+            <select id="platform" name="platform">
+                <option value="playstation">PlayStation</option>
+                <option value="Nintendo">Nintendo</option>
+                <option value="Xbox">Xbox</option>
+                <option value="Steam">Steam</option>
+            </select>
+            <p>Characteristics: 
+
+                Single Player, Multiplayer and Co-op split screen  
+                
+                Cross platform multiplayer experience 
+                
+                Enhanced graphics  
+                
+                Buy now and get on the pitch!  </p>
+            <p>Genre:Sports </p>
+            <p>Author: Electronic Arts  </p>
+            <p>Price: £59.99 </p>
+            <button class="add-to-basket" onclick="addToBasket('EA Sports Fc 25', 59.99, 'Images/EASportsFC25.jpeg')">Add to Basket</button>
+        </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+        <button class="arrow arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
+        <div class="gallery">
+            <img src="Images/EAFC1.jpg" alt="EASportsFC25 Screenshot 1">
+            <img src="Images/EAFC2.jpg" alt="EASportsFC25 Screenshot 2">
+            <img src="Images/EAFC3.webp" alt="EASportsFC25 Screenshot 3">
+            <img src="Images/EAFC4.jpg" alt="EASportsFC25 Screenshot 4">
+            <img src="Images/EAFC5.jpg" alt="EASportsFC25 Screenshot 5">
+            <img src="Images/EAFC6.jpg" alt="EASportsFC25 Screenshot 6">
+        </div>
+        <button class="arrow arrow-right" onclick="scrollGallery(1)">&#10095;</button>
+    </div>
+
+    <footer id="footer">
+        <p>&copy; 2025 Hex Games. All Rights Reserved.</p>
+        <p>
+            <a href="TermsOfService.html">Terms of Service</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="AboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <script>
+        let basket = [];
+        function addToBasket(name, price, image) {
+    // Get the existing basket from Local Storage or initialize an empty array
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+    // Check if the item already exists in the basket
+    const existingItem = basket.find(item => item.name === name);
+    if (existingItem) {
+        // If the item exists, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // If the item doesn't exist, add it to the basket
+        basket.push({ name, price, image, quantity: 1 });
+    }
+
+    // Save the updated basket back to Local Storage
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    alert(`${name} has been added to your basket!`);
+}
+
+        let scrollAmount = 0;
+
+        function scrollGallery(direction) {
+            const gallery = document.querySelector('.gallery');
+            const galleryWidth = gallery.scrollWidth;
+            const containerWidth = document.querySelector('.gallery-container').offsetWidth;
+            const maxScroll = galleryWidth - containerWidth;
+
+            scrollAmount += direction * containerWidth;
+
+            if (scrollAmount < 0) {
+                scrollAmount = 0;
+            } else if (scrollAmount > maxScroll) {
+                scrollAmount = maxScroll;
+            }
+
+            gallery.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+    </script>
+</body>
+</html>
